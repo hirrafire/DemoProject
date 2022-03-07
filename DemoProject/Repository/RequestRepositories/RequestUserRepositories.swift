@@ -19,7 +19,7 @@ final class  RequestUserRepositories :NSObject ,UserRepository {
         super.init()
         
     }
-    func get() -> Future<Users,CustomError>{
+    func getUser() -> Future<Users,CustomError>{
         
         return Future<Users,CustomError> { [weak self] promise in
             var urlRequest =  Routing.getUser(nil).urlRequest
@@ -35,18 +35,18 @@ final class  RequestUserRepositories :NSObject ,UserRepository {
                                 let error  = CustomError(title: "", description: errorObject["message"] as! String, code: responseData.statusCode)
                                 promise(.failure(error))
                             }
-                        }catch{ print("erroMsg") }
+                        }catch{ Print("erroMsg") }
                         throw (response.validate() ?? NetworkError.unknownError)
                     }
                     
                     return data
-                } .decode(type: Users.self, decoder: JSONDecoder())
-                .sink(receiveCompletion: { completion in
+                } .decode(type: Users.self, decoder: JSONDecoder()).sink(receiveCompletion: { completion in
                     if case let .failure(error) = completion{
                         switch error {
                         case _ as DecodingError:
-                            let error  = CustomError(title: "", description: LocalizeHelper.shared.localizedString(forKey: "DecodingError"), code: 0)
-                            promise(.failure(error))
+                            let customError  = CustomError(title: "", description: LocalizeHelper.shared.localizedString(forKey: "DecodingError"), code: 0)
+                            Print(String(describing: error))
+                            promise(.failure(customError))
                         default :
                             let error  = CustomError(title: "", description: LocalizeHelper.shared.localizedString(forKey: "UnknownError"), code: 0)
                             promise(.failure(error))

@@ -7,13 +7,14 @@
 
 import UIKit
 
-public protocol DetailViewControllerDelegate: AnyObject {
+protocol DetailViewControllerDelegate: AnyObject {
     func navigateToHomePage()
     func navigateToSubDetailPage()
 }
 class DetailViewController: BaseViewController {
     public weak var delegate: DetailViewControllerDelegate?
     @IBOutlet weak var customView: DetailView!
+    var result: Results?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,31 @@ class DetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     override func configureView() {
-        
+        self.customView.userImage.layer.cornerRadius =   self.customView.userImage.frame.height
+        if let modal  = self.result{
+            let location = modal.location
+
+            self.customView.titleNameLabel.text = "Title: \(modal.name.title ?? "")"
+            self.customView.firstNameLabel.text = "First Name: \(modal.name.first ?? "")"
+            self.customView.secondNameLabel.text = "Last Name: \(modal.name.last ?? "")"
+            self.customView.genderLabel.text = "Gender: \(modal.gender ?? "")"
+            
+            self.customView.streetLabel.text = "Street: \(location?.street?.number ?? 0) \(location?.street?.name ?? "")"
+            self.customView.cityLabel.text = "City: \(location?.city ?? "")"
+            self.customView.stateLabel.text = "State: \(location?.state ?? "")"
+            self.customView.countryLabel.text = "Country: \(location?.country ?? "")"
+            self.customView.postCodeLabel.text = "Post Code: \(location?.postcode ?? "0")"
+
+
+            self.customView.emailLabel.text = "Email: \(modal.email ?? "")"
+            self.customView.dobLabel.text = "Date of Birth: \(modal.dateOfBirth)"
+            self.customView.cellNumberLabel.text = "Cell Number: \(modal.cell ?? "")"
+            self.customView.landlineNumberLabel.text = "Phone Number: \(modal.phone ?? "")"
+            self.customView.ageLabel.text = "Age: \(modal.dob.age ?? 100)"
+            
+            self.customView.userImage.setImage(modal.picture?.large ?? "")
+         
+        }
     }
     override func configureCallBacks() {
         weak var weakSelf = self

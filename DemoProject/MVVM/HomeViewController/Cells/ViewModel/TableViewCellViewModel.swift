@@ -11,8 +11,9 @@ class TableViewCellViewModel {
     
     // MARK: - Properties
     var model: UserDataRepresentable!
-    var name: String{ model.name.first}
-    var address: String { model.location.street.name}
+    var name: String{ model.name.first ?? ""}
+    var address: String { model.location.street?.name ?? ""}
+    var imageUrl: String { model.picture.medium ?? ""}
 
     init(_ model: UserDataRepresentable) {
         self.model = model
@@ -23,10 +24,10 @@ class TableViewCellViewModel {
 extension TableViewCellViewModel: Hashable {
     
     static func == (lhs: TableViewCellViewModel, rhs: TableViewCellViewModel) -> Bool {
-        return lhs.model.id == rhs.model.id
+        return lhs.model.id.name == rhs.model.id.name
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(model.id)
+        hasher.combine(model.id.name)
     }
 }

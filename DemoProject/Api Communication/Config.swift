@@ -12,7 +12,7 @@ let API_VERSION = "/v" + api_version
 let API_BASE_URL_Production = "API_BASE_URL_Production"
 let API_BASE_URL_Staging = "https://randomuser.me/"
 let API_SOCKET_URL = "API_CHAT_SOCKET_URL"
-let API_User_URL = API_BASE_URL_Staging + "/api"
+let API_User_URL = API_BASE_URL_Staging + "api?results=10"
 
 
 // The domain used for creating all errors.

@@ -12,20 +12,23 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Users : Codable {
-	let results : [Results]?
-	let info : Info?
+struct Name : Codable {
+	let title : String?
+	let first : String?
+	let last : String?
 
 	enum CodingKeys: String, CodingKey {
 
-		case results = "results"
-		case info = "info"
+		case title = "title"
+		case first = "first"
+		case last = "last"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		results = try values.decodeIfPresent([Results].self, forKey: .results)
-		info = try values.decodeIfPresent(Info.self, forKey: .info)
+		title = try values.decodeIfPresent(String.self, forKey: .title)
+		first = try values.decodeIfPresent(String.self, forKey: .first)
+		last = try values.decodeIfPresent(String.self, forKey: .last)
 	}
 
 }

@@ -12,20 +12,35 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Users : Codable {
-	let results : [Results]?
-	let info : Info?
+struct Login : Codable {
+	let uuid : String?
+	let username : String?
+	let password : String?
+	let salt : String?
+	let md5 : String?
+	let sha1 : String?
+	let sha256 : String?
 
 	enum CodingKeys: String, CodingKey {
 
-		case results = "results"
-		case info = "info"
+		case uuid = "uuid"
+		case username = "username"
+		case password = "password"
+		case salt = "salt"
+		case md5 = "md5"
+		case sha1 = "sha1"
+		case sha256 = "sha256"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		results = try values.decodeIfPresent([Results].self, forKey: .results)
-		info = try values.decodeIfPresent(Info.self, forKey: .info)
+		uuid = try values.decodeIfPresent(String.self, forKey: .uuid)
+		username = try values.decodeIfPresent(String.self, forKey: .username)
+		password = try values.decodeIfPresent(String.self, forKey: .password)
+		salt = try values.decodeIfPresent(String.self, forKey: .salt)
+		md5 = try values.decodeIfPresent(String.self, forKey: .md5)
+		sha1 = try values.decodeIfPresent(String.self, forKey: .sha1)
+		sha256 = try values.decodeIfPresent(String.self, forKey: .sha256)
 	}
 
 }

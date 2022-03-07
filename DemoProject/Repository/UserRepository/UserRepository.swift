@@ -9,6 +9,6 @@ import Foundation
 import Combine
 protocol UserRepository {
    
-    func get() -> Future<Users,CustomError>
+    func getUser() -> Future<Users,CustomError>
  
 }

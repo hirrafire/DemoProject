@@ -12,20 +12,26 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Users : Codable {
-	let results : [Results]?
-	let info : Info?
+struct Info : Codable {
+	let seed : String?
+	let results : Int?
+	let page : Int?
+	let version : String?
 
 	enum CodingKeys: String, CodingKey {
 
+		case seed = "seed"
 		case results = "results"
-		case info = "info"
+		case page = "page"
+		case version = "version"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		results = try values.decodeIfPresent([Results].self, forKey: .results)
-		info = try values.decodeIfPresent(Info.self, forKey: .info)
+		seed = try values.decodeIfPresent(String.self, forKey: .seed)
+		results = try values.decodeIfPresent(Int.self, forKey: .results)
+		page = try values.decodeIfPresent(Int.self, forKey: .page)
+		version = try values.decodeIfPresent(String.self, forKey: .version)
 	}
 
 }

@@ -12,20 +12,20 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Users : Codable {
-	let results : [Results]?
-	let info : Info?
+struct Coordinates : Codable {
+	let latitude : String?
+	let longitude : String?
 
 	enum CodingKeys: String, CodingKey {
 
-		case results = "results"
-		case info = "info"
+		case latitude = "latitude"
+		case longitude = "longitude"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		results = try values.decodeIfPresent([Results].self, forKey: .results)
-		info = try values.decodeIfPresent(Info.self, forKey: .info)
+		latitude = try values.decodeIfPresent(String.self, forKey: .latitude)
+		longitude = try values.decodeIfPresent(String.self, forKey: .longitude)
 	}
 
 }

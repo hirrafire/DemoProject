@@ -28,6 +28,9 @@ class DetailView: UIView {
     // Phone Number
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var landlineNumberLabel: UILabel!
+    @IBOutlet weak var cellNumberLabel: UILabel!
+
+    @IBOutlet weak var userImage: UIImageView!
     // Button
     
     @IBOutlet weak var continueButton: UIButton!
@@ -40,7 +43,6 @@ class DetailView: UIView {
     }
     
     /*
-     @IBOutlet weak var cellNumberLabel: UILabel!
      // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {

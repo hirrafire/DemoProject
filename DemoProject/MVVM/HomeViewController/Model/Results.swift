@@ -65,8 +65,8 @@ extension Results: UserDataRepresentable{
     var lastName: String { name?.last ?? "" }
     var title: String { name?.title ?? "" }
     var userGender: String { gender ?? ""   }
-    var streetName: String { location?.street.name ?? "" }
-    var streetNumber: Int { location?.street.number  ?? 1}
+    var streetName: String { location?.street?.name ?? "" }
+    var streetNumber: Int { location?.street?.number  ?? 1}
     var dateOfBirth: String { dob?.date ?? ""}
     var age: Int { dob?.age ?? 1}
     var phoneNumber: String { phone ?? ""}

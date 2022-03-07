@@ -8,11 +8,14 @@
 import Foundation
 import Combine
 
+typealias Completion = () -> Void
 class HomeViewModel {
     typealias Dependencies = UserDependencyInjection
     private let dependencies = Dependencies()
     var dataSource: [TableViewCellViewModel] = []
     var repository: UserRepository { return dependencies.userRepository }
+    var didUpdateDataSource: Completion?
+    @Published var didSelect : Results?
     @Published var result : [Results]?
     @Published var errorMessage: CustomError? = nil
     private var subscriptions = Set<AnyCancellable>()
@@ -22,11 +25,12 @@ class HomeViewModel {
         showHud = true
 
     }
+    
     func fetchUser() {
         if !showHud{
         showHud = true
         }
-        repository.get().receive(on: RunLoop.main).sink(receiveCompletion: {[weak self] complition in
+        repository.getUser().receive(on: RunLoop.main).sink(receiveCompletion: {[weak self] complition in
             self?.showHud = false
             switch complition
             {
@@ -38,20 +42,20 @@ class HomeViewModel {
         }, receiveValue: { [weak self] user in
             self?.result = user.results
             self?.prepareDataSource(with: self?.result ?? [])
+            self?.didUpdateDataSource?()
         }).store(in: &subscriptions)
     }
-    private func prepareDataSource(with draws: [Results]) {
+    private func prepareDataSource(with results: [Results]) {
         dataSource.removeAll()
         
-        draws.forEach { draw in
-            let model = TableViewCellViewModel(draw)
+        results.forEach { result in
+            let model = TableViewCellViewModel(result)
             dataSource.append(model)
         }
     }
     private func onDetail(_ representable: UserDataRepresentable) {
         guard let model = representable as? Results else { return }
-        
-//        didSelect.onNext((model))
+        didSelect = model
     }
 }
 extension HomeViewModel{
