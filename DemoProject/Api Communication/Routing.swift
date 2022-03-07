@@ -1,49 +1,32 @@
 //
 //  OCSSRouting.swift
-//  DemoProject
+//  ocss-ios-chatsdk
 //
-//  Created by Hira Saleem on 01/3/2022.
+//  Created by Hira Saleem on 03/03/2022.
 //
 import UIKit
 
 enum Routing{
     
-    case Ping([String: Any]?)
-    case GetGithubUser([String: Any]?)
-
+    case getUser([String: Any]?)
 
     var urlRequest: URLRequest{
         
         let touple : (path: String, parameters: [String: Any]?) = {
             switch self{
-            case .Ping(let params):
-                return(API_User_URL + "/ping", params)
-            case .GetGithubUser(let params):
-                return(API_User_URL + "/users", params)
-
+            case .getUser(let params):
+                return(API_User_URL, params)
             }
         }()
         
         let url:URL = URL(string: touple.path)!
         var urlRequest = URLRequest(url:url)
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         if let param = touple.parameters
         {
             urlRequest.httpBody = Routing.createDataFromJSONDictionary(dataToSend:param)
         }
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.addValue("ios", forHTTPHeaderField: "OCSSChat-sdk")
-        urlRequest.addValue(sdk_version, forHTTPHeaderField: "OCSSChat-sdk-version")
-
-        urlRequest.addValue(device_identifire, forHTTPHeaderField: "deviceId")
-       // urlRequest.addValue("OCSSTNT0001", forHTTPHeaderField: "tenantId")
-        urlRequest.addValue("TNT2112", forHTTPHeaderField: "tenantId")
-        
-        urlRequest.addValue("android", forHTTPHeaderField: "osType")
-
-        urlRequest.timeoutInterval = 100
-
-
         
         return urlRequest
     }
@@ -71,8 +54,3 @@ enum Routing{
 }
 
 
-extension URL {
-    func toUrlRequest() -> URLRequest {
-        URLRequest(url: self, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
-    }
-}

@@ -7,7 +7,8 @@
 
 import Foundation
 import Combine
-
 protocol UserRepository {
-    func get(username: String) -> AnyPublisher<GithubUser, Error>
+   
+    func get() -> Future<Users,CustomError>
+ 
 }

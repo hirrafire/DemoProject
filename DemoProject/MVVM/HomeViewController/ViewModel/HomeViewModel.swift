@@ -8,60 +8,56 @@
 import Foundation
 import Combine
 
-final class HomeViewModel : ObservableObject {
+class HomeViewModel {
+    typealias Dependencies = UserDependencyInjection
+    private let dependencies = Dependencies()
+    var dataSource: [TableViewCellViewModel] = []
+    var repository: UserRepository { return dependencies.userRepository }
+    @Published var result : [Results]?
+    @Published var errorMessage: CustomError? = nil
+    private var subscriptions = Set<AnyCancellable>()
+    
+    @Published var showHud = false
+    init() {
+        showHud = true
 
-    @Published var githubUser: GithubUser?
-    @Published var isLoading: Bool = false
-    @Published var error: Error?
-    private let userName: String = ""
-//    private let githubUserRepository = GithubUserRepository()
-//    private var cancellableSet = Set<AnyCancellable>()
-//
-//    init(userName: String) {
-//        self.userName = userName
-//    }
-//
-//    func initialize() {
-//        cancellableSet.removeAll()
-//        subscribe()
-//    }
-//
-//    func refresh() {
-//        githubUserRepository.refresh(userName: userName)
-//            .receive(on: DispatchQueue.main)
-//            .sink {}
-//            .store(in: &cancellableSet)
-//    }
-//
-//    func retry() {
-//        githubUserRepository.refresh(userName: userName)
-//            .receive(on: DispatchQueue.main)
-//            .sink {}
-//            .store(in: &cancellableSet)
-//    }
-//
-//    private func subscribe() {
-//        githubUserRepository.follow(userName: userName)
-//            .receive(on: DispatchQueue.main)
-//            .sink { state in
-//                state.doAction(
-//                    onLoading: { _ in
-//                        self.githubUser = nil
-//                        self.isLoading = true
-//                        self.error = nil
-//                    },
-//                    onCompleted: { githubUser, _, _ in
-//                        self.githubUser = githubUser
-//                        self.isLoading = false
-//                        self.error = nil
-//                    },
-//                    onError: { error in
-//                        self.githubUser = nil
-//                        self.isLoading = false
-//                        self.error = error
-//                    }
-//                )
-//            }
-//            .store(in: &cancellableSet)
-//    }
+    }
+    func fetchUser() {
+        if !showHud{
+        showHud = true
+        }
+        repository.get().receive(on: RunLoop.main).sink(receiveCompletion: {[weak self] complition in
+            self?.showHud = false
+            switch complition
+            {
+            case .failure(let error):
+                self?.errorMessage = error
+            case .finished:
+                Print("Finished")
+            }
+        }, receiveValue: { [weak self] user in
+            self?.result = user.results
+            self?.prepareDataSource(with: self?.result ?? [])
+        }).store(in: &subscriptions)
+    }
+    private func prepareDataSource(with draws: [Results]) {
+        dataSource.removeAll()
+        
+        draws.forEach { draw in
+            let model = TableViewCellViewModel(draw)
+            dataSource.append(model)
+        }
+    }
+    private func onDetail(_ representable: UserDataRepresentable) {
+        guard let model = representable as? Results else { return }
+        
+//        didSelect.onNext((model))
+    }
+}
+extension HomeViewModel{
+    func onSelect(_ cellViewModel: TableViewCellViewModel?) {
+        guard let model = cellViewModel?.model else { return }
+
+        onDetail(model)
+    }
 }

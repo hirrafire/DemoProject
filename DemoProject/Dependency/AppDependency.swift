@@ -8,22 +8,16 @@
 
 import UIKit
 
-//
-//protocol HasActivityIndicator {
-//    var activity: ActivityIndicator { get }
-//}
-//protocol HasUserRepository {
-//    var userRepository: UserRepository { get }
-//}
-//class AppDependency:HasActivityIndicator,HasUserRepository{
-//    let window: UIWindow
-//    let activity: ActivityIndicator
-//    let userRepository: UserRepository
-//
-//    init(window: UIWindow) {
-//        self.window = window
-//        self.activity = ActivityIndicator()
-//        self.userRepository = DataUserRepository()
-//
-//    }
-//}
+
+protocol HasUserRepository {
+    var userRepository: UserRepository { get }
+}
+class UserDependencyInjection: HasUserRepository {
+ 
+    let userRepository: UserRepository
+
+    init(){
+        self.userRepository = RequestUserRepositories()
+    }
+}
+

@@ -1,21 +1,24 @@
 //
-//  HomeViewController.swift
+//  SubDetailViewController.swift
 //  DemoProject
 //
-//  Created by Hira Saleem on 01/03/2022.
+//  Created by Hira Saleem on 03/03/2022.
 //
 
 import UIKit
 
-class HomeViewController: BaseViewController {
-    @IBOutlet weak var tableView: UITableView!
-    
+class SubDetailViewController: BaseViewController {
+    public weak var delegate: DetailViewControllerDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "SubDetailViewController"
 
         // Do any additional setup after loading the view.
     }
-    
+    @IBAction func navigateToHomePageAction(_ sender: Any) {
+        self.delegate?.navigateToHomePage()
+    }
 
     /*
     // MARK: - Navigation
