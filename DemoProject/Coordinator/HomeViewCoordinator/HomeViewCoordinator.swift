@@ -28,7 +28,7 @@ class HomeViewCoordinator: Coordinator {
 extension HomeViewCoordinator: HomeViewControllerDelegate {
 
     // Navigate to next page
-    func navigateToNextPage(_ result: Results) {
+    func navigateToNextPage(_ result: UserDataRepresentable) {
        let detailCoordinator = DetailViewCoordinator(navigationController: navigationController)
         detailCoordinator.delegate = self
         detailCoordinator.modal = result

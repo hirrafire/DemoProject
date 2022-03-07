@@ -14,7 +14,7 @@ protocol DetailViewControllerDelegate: AnyObject {
 class DetailViewController: BaseViewController {
     public weak var delegate: DetailViewControllerDelegate?
     @IBOutlet weak var customView: DetailView!
-    var result: Results?
+    var modal: UserDataRepresentable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class DetailViewController: BaseViewController {
     }
     override func configureView() {
         self.customView.userImage.layer.cornerRadius =   self.customView.userImage.frame.height
-        if let modal  = self.result{
+        if let modal  = self.modal{
             let location = modal.location
 
             self.customView.titleNameLabel.text = "Title: \(modal.name.title ?? "")"
@@ -43,7 +43,7 @@ class DetailViewController: BaseViewController {
 
 
             self.customView.emailLabel.text = "Email: \(modal.email ?? "")"
-            self.customView.dobLabel.text = "Date of Birth: \(modal.dateOfBirth)"
+            self.customView.dobLabel.text = "Date of Birth: \(modal.dob.date ?? "")"
             self.customView.cellNumberLabel.text = "Cell Number: \(modal.cell ?? "")"
             self.customView.landlineNumberLabel.text = "Phone Number: \(modal.phone ?? "")"
             self.customView.ageLabel.text = "Age: \(modal.dob.age ?? 100)"

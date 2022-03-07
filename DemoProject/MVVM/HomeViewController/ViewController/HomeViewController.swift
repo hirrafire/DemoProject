@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 protocol HomeViewControllerDelegate: AnyObject {
-    func navigateToNextPage(_ result: Results)
+    func navigateToNextPage(_ result: UserDataRepresentable)
 }
 class HomeViewController: BaseViewController,ActivityIndicatorPresenter {
     
@@ -102,6 +102,8 @@ extension HomeViewController: UITableViewDelegate{
     
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.navigateToNextPage(self.results[indexPath.row])
+        let item = dataSource.itemIdentifier(for: indexPath)
+//        viewModel.onSelect(item)
+        self.delegate?.navigateToNextPage(item!.model as! Results)
     }
 }

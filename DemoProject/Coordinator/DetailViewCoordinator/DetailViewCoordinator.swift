@@ -20,7 +20,7 @@ class DetailViewCoordinator: Coordinator {
     
     // We use this delegate to keep a reference to the parent coordinator
     weak var delegate: BackToHomeViewControllerDelegate?
-    var modal: Results?
+    var modal: UserDataRepresentable?
 
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -29,7 +29,7 @@ class DetailViewCoordinator: Coordinator {
     func start() {
         let detailViewController : DetailViewController = DetailViewController()
         detailViewController.delegate = self
-        detailViewController.result = modal
+        detailViewController.modal = modal
         self.navigationController.pushViewController(detailViewController, animated: true)
     }
 }
