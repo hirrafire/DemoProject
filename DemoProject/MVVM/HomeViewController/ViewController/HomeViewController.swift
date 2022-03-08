@@ -103,7 +103,6 @@ extension HomeViewController: UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataSource.itemIdentifier(for: indexPath)
-//        viewModel.onSelect(item)
-        self.delegate?.navigateToNextPage(item!.model as! Results)
+        self.delegate?.navigateToNextPage(item!.model)
     }
 }
