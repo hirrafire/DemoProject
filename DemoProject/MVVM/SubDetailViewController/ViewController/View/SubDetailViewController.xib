@@ -23,6 +23,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Back to home">
                         <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                        <color key="baseForegroundColor" systemColor="labelColor"/>
                     </buttonConfiguration>
                     <connections>
                         <action selector="navigateToHomePageAction:" destination="-1" eventType="touchUpInside" id="Tcs-zU-ZOz"/>
@@ -41,6 +42,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
