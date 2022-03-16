@@ -19,7 +19,9 @@ protocol UserDataRepresentable {
     var phone: String! { get }
     var cell: String! { get }
     var id: Id! { get }
-    var picture: Picture! { get }
     var nat: String! { get }
-    
+    var streetName: String! { get }
+    var firstName: String! { get }
+    var userPicture: String! { get }
+
 }

@@ -9,6 +9,7 @@ import UIKit
 enum Routing{
     
     case getUser([String: Any]?)
+    case getArtist([String: Any]?)
 
     var urlRequest: URLRequest{
         
@@ -16,6 +17,8 @@ enum Routing{
             switch self{
             case .getUser(let params):
                 return(API_User_URL, params)
+            case .getArtist(let params):
+                return(API_Artist_URL, params)
             }
         }()
         

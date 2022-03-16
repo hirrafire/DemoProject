@@ -68,6 +68,11 @@
 		04BD605A27D61AC30046A329 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD605927D61AC30046A329 /* Coordinates.swift */; };
 		04BD605D27D61AFC0046A329 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD605B27D61AFC0046A329 /* Id.swift */; };
 		04BD605E27D61AFC0046A329 /* Registered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD605C27D61AFC0046A329 /* Registered.swift */; };
+		04BF2B9D27E1EEC30059464F /* SubDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF2B9C27E1EEC30059464F /* SubDetailModel.swift */; };
+		04BF2B9F27E1EF900059464F /* ArtistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF2B9E27E1EF900059464F /* ArtistRepository.swift */; };
+		04BF2BA327E1EFCE0059464F /* ArtistResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF2BA127E1EFCE0059464F /* ArtistResponseModel.swift */; };
+		04BF2BA427E1EFCE0059464F /* ArtistResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF2BA227E1EFCE0059464F /* ArtistResults.swift */; };
+		04BF2BA627E1F0360059464F /* RequestArtistRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF2BA527E1F0360059464F /* RequestArtistRepositories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +158,11 @@
 		04BD605927D61AC30046A329 /* Coordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		04BD605B27D61AFC0046A329 /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		04BD605C27D61AFC0046A329 /* Registered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registered.swift; sourceTree = "<group>"; };
+		04BF2B9C27E1EEC30059464F /* SubDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailModel.swift; sourceTree = "<group>"; };
+		04BF2B9E27E1EF900059464F /* ArtistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistRepository.swift; sourceTree = "<group>"; };
+		04BF2BA127E1EFCE0059464F /* ArtistResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistResponseModel.swift; sourceTree = "<group>"; };
+		04BF2BA227E1EFCE0059464F /* ArtistResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistResults.swift; sourceTree = "<group>"; };
+		04BF2BA527E1F0360059464F /* RequestArtistRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestArtistRepositories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +227,7 @@
 		0203B95F27D098E90004437C /* SubDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				04BF2BA027E1EFAD0059464F /* Model */,
 				029DF05127D1D540004C454F /* ViewModel */,
 				0203B96027D099FA0004437C /* ViewController */,
 			);
@@ -376,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				0283304427CF2E4900D31552 /* UserRepository.swift */,
+				04BF2B9E27E1EF900059464F /* ArtistRepository.swift */,
 			);
 			path = UserRepository;
 			sourceTree = "<group>";
@@ -384,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				0283304627CF2E4900D31552 /* RequestUserRepositories.swift */,
+				04BF2BA527E1F0360059464F /* RequestArtistRepositories.swift */,
 			);
 			path = RequestRepositories;
 			sourceTree = "<group>";
@@ -477,6 +490,7 @@
 		029DF05127D1D540004C454F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				04BF2B9C27E1EEC30059464F /* SubDetailModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -585,6 +599,15 @@
 				04BD602D27D6147C0046A329 /* UIImageView+Extension.swift */,
 			);
 			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		04BF2BA027E1EFAD0059464F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04BF2BA127E1EFCE0059464F /* ArtistResponseModel.swift */,
+				04BF2BA227E1EFCE0059464F /* ArtistResults.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -737,14 +760,18 @@
 				0203B96327D09A090004437C /* SubDetailViewController.swift in Sources */,
 				029DF05E27D1E53D004C454F /* TableViewCellViewModel.swift in Sources */,
 				0283305D27CF2E4900D31552 /* AppDependency.swift in Sources */,
+				04BF2B9D27E1EEC30059464F /* SubDetailModel.swift in Sources */,
 				029DF05A27D1DE09004C454F /* UserDataRepresentable.swift in Sources */,
 				04BD605027D61A620046A329 /* Info.swift in Sources */,
+				04BF2BA627E1F0360059464F /* RequestArtistRepositories.swift in Sources */,
 				04BD605827D61A810046A329 /* Users.swift in Sources */,
 				04BD605327D61A620046A329 /* Dob.swift in Sources */,
 				02B0576327CDEF29004968E2 /* ViewController.swift in Sources */,
 				0283305C27CF2E4900D31552 /* RequestUserRepositories.swift in Sources */,
 				029DF05327D1D574004C454F /* DetailViewModel.swift in Sources */,
 				0203B95A27D095D00004437C /* HomeViewCoordinator.swift in Sources */,
+				04BF2BA427E1EFCE0059464F /* ArtistResults.swift in Sources */,
+				04BF2B9F27E1EF900059464F /* ArtistRepository.swift in Sources */,
 				0283305627CF2E4900D31552 /* Config.swift in Sources */,
 				0203B97A27D0D02F0004437C /* TableViewCell.swift in Sources */,
 				0283306027CF2E4900D31552 /* Enum.swift in Sources */,
@@ -763,6 +790,7 @@
 				0203B96C27D0B0FA0004437C /* Routing.swift in Sources */,
 				0283305B27CF2E4900D31552 /* UserRepository.swift in Sources */,
 				04BD605427D61A620046A329 /* Picture.swift in Sources */,
+				04BF2BA327E1EFCE0059464F /* ArtistResponseModel.swift in Sources */,
 				04BD605627D61A620046A329 /* Timezone.swift in Sources */,
 				0283305F27CF2E4900D31552 /* LocalizeHelper.swift in Sources */,
 				04BD605527D61A620046A329 /* Street.swift in Sources */,

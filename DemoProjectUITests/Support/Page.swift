@@ -45,7 +45,9 @@ class Page {
         waitFor(element: element, status: .exist)
         element.typeText(text)
     }
-    
+    func terminateApp() {
+        app.terminate()
+    }
     func waitFor(element: XCUIElement, status: UIState) {
         let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: status.rawValue), object: element)
         let result = XCTWaiter.wait(for: [expectation], timeout: 10)

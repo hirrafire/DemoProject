@@ -9,6 +9,7 @@ import XCTest
 
 final class SubDetailPage: Page {
     lazy var backToHomeButton = app.buttons["Back to home"].firstMatch
+    lazy var users = app.tables.cells.firstMatch
 
     required init(_ app: XCUIApplication) {
         super.init(app)
@@ -18,6 +19,8 @@ final class SubDetailPage: Page {
     
     @discardableResult
     func backToHome() -> HomePage {
+        tap(element: users)
+
         tap(element: backToHomeButton)
 
         return HomePage(app)

@@ -28,6 +28,30 @@ class DemoProjectTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
+    func testArtistValidApiCallGetsHTTPStatusCode200() throws {
+      try XCTSkipUnless(
+        networkMonitor.isReachable,
+        "Network connectivity test")
+
+      // given
+      let urlString = API_Artist_URL
+      let url = URL(string: urlString)!
+      let promise = expectation(description: "Status : Ok")
+      let dataTask = sut.dataTask(with: url) { _, response, error in
+        if let error = error {
+          XCTFail("Error: \(error.localizedDescription)")
+          return
+        } else if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+          if statusCode == 200 {
+            promise.fulfill()
+          } else {
+            XCTFail("Status code: \(statusCode)")
+          }
+        }
+      }
+      dataTask.resume()
+      wait(for: [promise], timeout: 5)
+    }
     func testValidApiCallGetsHTTPStatusCode200() throws {
       try XCTSkipUnless(
         networkMonitor.isReachable,

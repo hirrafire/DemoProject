@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubDetailViewController" customModule="DemoProject" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="GLj-tA-9vh" id="Rd0-kc-HAN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjV-Vl-dNW">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Back to home">
                         <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
@@ -29,14 +30,21 @@
                         <action selector="navigateToHomePageAction:" destination="-1" eventType="touchUpInside" id="Tcs-zU-ZOz"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GLj-tA-9vh">
+                    <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="xjV-Vl-dNW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="84S-FI-e3T"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="GLj-tA-9vh" secondAttribute="bottom" id="Dry-WL-HUx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GLj-tA-9vh" secondAttribute="trailing" id="L8b-ka-cRi"/>
                 <constraint firstItem="xjV-Vl-dNW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QjY-UK-cdf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xjV-Vl-dNW" secondAttribute="bottom" id="SNB-wA-Khe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xjV-Vl-dNW" secondAttribute="trailing" id="mR3-0w-v8q"/>
+                <constraint firstItem="GLj-tA-9vh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="q7V-0S-s2w"/>
+                <constraint firstItem="GLj-tA-9vh" firstAttribute="top" secondItem="xjV-Vl-dNW" secondAttribute="bottom" id="xu4-QX-SB8"/>
             </constraints>
             <point key="canvasLocation" x="139" y="72"/>
         </view>

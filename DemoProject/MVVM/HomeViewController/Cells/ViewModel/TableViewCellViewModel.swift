@@ -11,9 +11,9 @@ class TableViewCellViewModel {
     
     // MARK: - Properties
     var model: UserDataRepresentable!
-    var name: String{ model.name.first ?? ""}
-    var address: String { model.location.street?.name ?? ""}
-    var imageUrl: String { model.picture.medium ?? ""}
+    var name: String{ model.firstName ?? ""}
+    var address: String { model.streetName ?? ""}
+    var imageUrl: String { model.userPicture ?? ""}
 
     init(_ model: UserDataRepresentable) {
         self.model = model

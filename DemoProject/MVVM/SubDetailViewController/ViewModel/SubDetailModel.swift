@@ -1,22 +1,21 @@
 //
-//  HomeViewModel.swift
+//  SubDetailModel.swift
 //  DemoProject
 //
-//  Created by Hira Saleem on 01/03/2022.
+//  Created by Hira Saleem on 16/03/2022.
 //
 
 import Foundation
 import Combine
 
-typealias Completion = () -> Void
-class HomeViewModel {
+class SubDetailModel {
     typealias Dependencies = UserDependencyInjection
     private let dependencies = Dependencies()
     var dataSource: [TableViewCellViewModel] = []
-    var repository: UserRepository { return dependencies.userRepository }
+    var repository: ArtistRepository { return dependencies.artistRepository }
     var didUpdateDataSource: Completion?
-    @Published var didSelect : Results?
-    @Published var result : [Results]?
+    @Published var didSelect : ArtistResults?
+    @Published var result : [ArtistResults]?
     @Published var errorMessage: CustomError? = nil
     private var subscriptions = Set<AnyCancellable>()
     
@@ -30,7 +29,7 @@ class HomeViewModel {
         if !showHud{
             showHud = true
         }
-        repository.getUser().receive(on: RunLoop.main).sink(receiveCompletion: {[weak self] complition in
+        repository.getArtist().receive(on: RunLoop.main).sink(receiveCompletion: {[weak self] complition in
             self?.showHud = false
             switch complition
             {
@@ -39,13 +38,13 @@ class HomeViewModel {
             case .finished:
                 Print("Finished")
             }
-        }, receiveValue: { [weak self] user in
-            self?.result = user.results
+        }, receiveValue: { [weak self] artist in
+            self?.result = artist.results
             self?.prepareDataSource(with: self?.result ?? [])
             self?.didUpdateDataSource?()
         }).store(in: &subscriptions)
     }
-    private func prepareDataSource(with results: [Results]) {
+    private func prepareDataSource(with results: [ArtistResults]) {
         dataSource.removeAll()
         
         results.forEach { result in

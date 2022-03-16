@@ -60,12 +60,20 @@ struct Results : Codable {
 
 }
 extension Results: UserDataRepresentable{
+    var userPicture: String! {
+        picture.large ?? ""
+    }
+    
+    var streetName: String! { location?.street?.name ?? "" }
+    
+    var firstName: String! { name?.first ?? "" }
+    
     var userId: String! {id.value ?? "1"}
-    var firstName: String { name?.first ?? "" }
+    var firstUserName: String { name?.first ?? "" }
     var lastName: String { name?.last ?? "" }
     var title: String { name?.title ?? "" }
     var userGender: String { gender ?? ""   }
-    var streetName: String { location?.street?.name ?? "" }
+    var streetUserName: String { location?.street?.name ?? "" }
     var streetNumber: Int { location?.street?.number  ?? 1}
     var dateOfBirth: String { dob?.date ?? ""}
     var age: Int { dob?.age ?? 1}

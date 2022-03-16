@@ -34,7 +34,8 @@ class DetailViewController: BaseViewController {
             self.customView.firstNameLabel.text = "First Name: \(modal.name.first ?? "")"
             self.customView.secondNameLabel.text = "Last Name: \(modal.name.last ?? "")"
             self.customView.genderLabel.text = "Gender: \(modal.gender ?? "")"
-            
+
+            // Address
             self.customView.streetLabel.text = "Street: \(location?.street?.number ?? 0) \(location?.street?.name ?? "")"
             self.customView.cityLabel.text = "City: \(location?.city ?? "")"
             self.customView.stateLabel.text = "State: \(location?.state ?? "")"
@@ -48,7 +49,7 @@ class DetailViewController: BaseViewController {
             self.customView.landlineNumberLabel.text = "Phone Number: \(modal.phone ?? "")"
             self.customView.ageLabel.text = "Age: \(modal.dob.age ?? 100)"
             
-            self.customView.userImage.setImage(modal.picture?.large ?? "")
+            self.customView.userImage.setImage(modal.userPicture ?? "")
          
         }
     }

@@ -1,0 +1,64 @@
+//
+//  RequestArtistRepositories.swift
+//  DemoProject
+//
+//  Created by Hira Saleem on 16/03/2022.
+//
+
+
+import Foundation
+import Combine
+
+final class  RequestArtistRepositories :NSObject ,ArtistRepository {
+    
+    var session : URLSession
+    var cancelable  =  Set<AnyCancellable>()
+    override init() {
+        self.session = URLSession(configuration: URLSessionConfiguration.default)
+        super.init()
+        
+    }
+    func getArtist() -> Future<ArtistResponseModel,CustomError>{
+        
+        return Future<ArtistResponseModel,CustomError> { [weak self] promise in
+            var urlRequest =  Routing.getArtist(nil).urlRequest
+            Print("Request URL : \(urlRequest.url?.absoluteString ?? "")")
+            urlRequest.httpMethod = "GET"
+            self?.session.dataTaskPublisher(for: urlRequest)
+                .tryMap{ (data, response) -> Data in
+                    guard response.validate() == nil else{
+                        do{
+                            let responseData = response as! HTTPURLResponse
+                            let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+                            if let errorObject = json?["response"] as? [String : Any]{
+                                let error  = CustomError(title: "", description: errorObject["message"] as! String, code: responseData.statusCode)
+                                promise(.failure(error))
+                            }
+                        }catch{ Print("erroMsg") }
+                        throw (response.validate() ?? NetworkError.unknownError)
+                    }
+                    
+                    return data
+                } .decode(type: ArtistResponseModel.self, decoder: JSONDecoder()).sink(receiveCompletion: { completion in
+                    if case let .failure(error) = completion{
+                        switch error {
+                        case _ as DecodingError:
+                            let customError  = CustomError(title: "", description: LocalizeHelper.shared.localizedString(forKey: "DecodingError"), code: 0)
+                            Print(String(describing: error))
+                            promise(.failure(customError))
+                        default :
+                            let error  = CustomError(title: "", description: LocalizeHelper.shared.localizedString(forKey: "UnknownError"), code: 0)
+                            promise(.failure(error))
+                        }
+                    }
+                },
+                      receiveValue:{
+                    promise(.success($0))
+                })
+                .store(in: &self!.cancelable)
+            
+        }
+    }
+    
+
+}
